@@ -55,9 +55,7 @@ struct Sample {
   double runtime_ms; // finish - start
 };
 
-// Decoupled: build data-only description of the workload. This keeps any
-// scheduling or ghOSt-specific code out of data construction to improve
-// test clarity and reusability.
+
 std::vector<WorkloadSpec> BuildWorkloadSpecs(int num_threads, int slow_idx,
                                              absl::Duration slow_d,
                                              absl::Duration fast_d) {
