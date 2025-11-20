@@ -144,6 +144,56 @@ cc_library(
     ],
 )
 
+# This is a test version of the CFS scheduler updated from shinka
+# TODO this is a possible breaking point
+cc_binary(
+    name = "agent_cfs_test",
+    srcs = [
+        "schedulers/test/cfs_agent.cc",
+        "schedulers/test/cfs_scheduler.cc",
+        "schedulers/test/cfs_scheduler.h",
+    ],
+    copts = compiler_flags,
+    deps = [
+        ":agent",
+        ":base",
+        ":topology",
+        "@com_google_absl//absl/container:flat_hash_map",
+        "@com_google_absl//absl/debugging:symbolize",
+        "@com_google_absl//absl/flags:parse",
+        "@com_google_absl//absl/functional:any_invocable",
+        "@com_google_absl//absl/numeric:int128",
+        "@com_google_absl//absl/strings:str_format",
+        "@com_google_absl//absl/synchronization",
+        "@com_google_absl//absl/time",
+    ],
+)
+
+cc_library(
+    name = "cfs_test_scheduler",
+    srcs = [
+        "schedulers/test/cfs_scheduler.cc",
+        "schedulers/test/cfs_scheduler.h",
+    ],
+    hdrs = [
+        "schedulers/test/cfs_scheduler.h",
+    ],
+    copts = compiler_flags,
+    deps = [
+        ":agent",
+        ":base",
+        ":topology",
+        "@com_google_absl//absl/container:flat_hash_map",
+        "@com_google_absl//absl/debugging:symbolize",
+        "@com_google_absl//absl/flags:parse",
+        "@com_google_absl//absl/functional:any_invocable",
+        "@com_google_absl//absl/numeric:int128",
+        "@com_google_absl//absl/strings:str_format",
+        "@com_google_absl//absl/synchronization",
+        "@com_google_absl//absl/time",
+    ],
+)
+
 cc_binary(
     name = "agent_exp",
     srcs = [
@@ -306,7 +356,7 @@ cc_binary(
     copts = compiler_flags,
     deps = [
         ":base",
-        ":cfs_scheduler",
+        ":cfs_test_scheduler",
         ":ghost",
         "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/flags:parse",
