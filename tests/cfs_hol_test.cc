@@ -21,7 +21,7 @@
 #include "absl/strings/substitute.h"
 #include "lib/base.h"
 #include "lib/ghost.h"
-#include "schedulers/cfs/cfs_scheduler.h"
+#include "schedulers/test/cfs_scheduler.h"
 
 ABSL_FLAG(bool, create_enclave_and_agent, false,
           "If true, spawns an enclave and a CFS agent for experiments. ");
@@ -34,7 +34,7 @@ ABSL_FLAG(int, hol_slow_index, 0, "Index of the slow thread [0..N-1]");
 ABSL_FLAG(int, hol_slow_ms, 100, "Slow thread busy time in milliseconds");
 ABSL_FLAG(int, hol_fast_ms, 5, "Fast thread busy time in milliseconds");
 ABSL_FLAG(std::string, hol_metrics,
-          "ghost-userspace/tests/metrics/cfs_hol.csv",
+          "metrics/cfs_hol.csv",
           "CSV path to write HoL metrics");
 
 namespace ghost {
