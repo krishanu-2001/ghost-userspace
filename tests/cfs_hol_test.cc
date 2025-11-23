@@ -1,13 +1,7 @@
 // Head-of-Line (HoL) blocking experiment for ghOSt CFS scheduler.
-//
-// Structure (mirrors simple_cfs.cc’s modularity):
-//  - WorkloadSpec: immutable, data-only description of each thread’s work.
-//  - BuildWorkloadSpecs: constructs specs (data creation decoupled from run).
-//  - RunHeadOfLine: scheduling/execution using ghOSt threads from specs,
-//    synchronizing a common release and collecting per-thread metrics.
-//  - PersistMetrics: saves metrics to CSV for offline analysis.
-//  - PrintSummary: quick, human-readable signal for likely HoL effects.
-//  - main: optionally creates an enclave + CFS agent, then runs the test.
+// This workload is a synchronized batch of ghOSt-managed threads where 
+// exactly one “slow” worker hogs CPU time while the rest are lightweight, 
+// letting you observe head-of-line blocking effects.
 
 #include <atomic>
 #include <fstream>
@@ -21,7 +15,7 @@
 #include "absl/strings/substitute.h"
 #include "lib/base.h"
 #include "lib/ghost.h"
-#include "schedulers/test/cfs_scheduler.h"
+#include "schedulers/test/cfs_scheduler.h" // these are our Shinka's agents
 
 ABSL_FLAG(bool, create_enclave_and_agent, false,
           "If true, spawns an enclave and a CFS agent for experiments. ");
